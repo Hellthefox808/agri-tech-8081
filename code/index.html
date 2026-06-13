@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriGuard — AIoT Agri-Health Guardian | Smart Produce Traceability</title>
+  <meta name="description" content="Precision Food Safety & Smart Produce Traceability with Geo-Aware Edge Intelligence. Real-time monitoring, AI grading, blockchain traceability, and geospatial farm analytics." />
+  <meta name="keywords" content="AIoT, agriculture, food safety, traceability, blockchain, edge AI, precision farming, smart agriculture" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body>
+
+  <!-- Particle Background -->
+  <div class="particle-bg" id="particle-bg"></div>
+
+  <div class="app-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">🌿</div>
+        <div class="brand-text">
+          <div class="brand-name">AgriGuard</div>
+          <div class="brand-subtitle">AIoT Health Guardian</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" id="sidebar-nav">
+        <div class="nav-section-label">Overview</div>
+        <a class="nav-item active" data-view="dashboard" id="nav-dashboard">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Live Dashboard</span>
+        </a>
+        <a class="nav-item" data-view="map" id="nav-map">
+          <span class="nav-icon">🗺️</span>
+          <span class="nav-label">GIS Map View</span>
+        </a>
+
+        <div class="nav-section-label">Intelligence</div>
+        <a class="nav-item" data-view="edge-ai" id="nav-edge-ai">
+          <span class="nav-icon">🧠</span>
+          <span class="nav-label">Edge AI Monitor</span>
+        </a>
+        <a class="nav-item" data-view="traceability" id="nav-traceability">
+          <span class="nav-icon">🔗</span>
+          <span class="nav-label">Batch Traceability</span>
+        </a>
+
+        <div class="nav-section-label">Operations</div>
+        <a class="nav-item" data-view="alerts" id="nav-alerts">
+          <span class="nav-icon" style="position:relative;">🔔
+            <span class="notif-dot" id="alert-dot"></span>
+          </span>
+          <span class="nav-label">Alerts & Control</span>
+          <span class="nav-badge" id="alert-count">3</span>
+        </a>
+        <a class="nav-item" data-view="architecture" id="nav-architecture">
+          <span class="nav-icon">🏗️</span>
+          <span class="nav-label">Architecture</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status">
+          <span class="status-dot"></span>
+          <span>System Online — v2.4.0</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
+          <h1 class="page-title" id="page-title">Live Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <div class="header-stat online">
+            <span>🟢</span>
+            <span class="stat-value" id="nodes-online">7/8</span>
+            <span style="color:var(--text-muted); font-size:0.72rem;">Nodes</span>
+          </div>
+          <div class="header-stat latency">
+            <span>⚡</span>
+            <span class="stat-value" id="avg-latency">187ms</span>
+            <span style="color:var(--text-muted); font-size:0.72rem;">Latency</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- View Container -->
+      <div class="view-container" id="view-container">
+        <!-- Views rendered dynamically by app.js -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- CDN Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <!-- App Scripts -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
