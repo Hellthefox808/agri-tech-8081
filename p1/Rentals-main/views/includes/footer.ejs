@@ -1,0 +1,34 @@
+<footer>
+  <div class="f-info">
+
+    <!-- ✅ Fixed: replaced all fa-hashtag with real social media icons -->
+    <div class="f-info-socials">
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-facebook"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+    </div>
+
+    <div class="f-info-brand">
+      &copy; <span id="year"></span> Rental's Private Limited 
+    </div>
+
+    <div class="f-info-links">
+      <a href="/privacy">Privacy</a>
+      &bull; 
+      <a href="/terms">Terms</a>
+      &bull;
+      <a href="/sitemap">Sitemap</a> 
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>

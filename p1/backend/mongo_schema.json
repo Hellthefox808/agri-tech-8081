@@ -1,0 +1,127 @@
+{
+  "collections": {
+    "countries": {
+      "validator_description": "Enforces ISO country standards, StartupBlink ranks, and agritech focuses.",
+      "sample_document": {
+        "_id": "666ba10f1c9d9b3a4f88127a",
+        "country_name": "India",
+        "country_code": "IND",
+        "startup_ecosystem_rank": 21,
+        "agritech_focus": "B2B Marketplace & Decentralized Smart Logistics",
+        "source": "StartupBlink Global Startup Ecosystem Index 2026",
+        "last_updated": "2026-06-14T01:43:00Z",
+        "active_states_count": 28
+      }
+    },
+    "states": {
+      "validator_description": "Enforces state boundaries, administrative linkage, and the 10 state admin limit.",
+      "sample_document": {
+        "_id": "666ba11f1c9d9b3a4f88127b",
+        "country_code": "IND",
+        "state_name": "Maharashtra",
+        "admin_boundary_id": "IN-MH",
+        "state_admin_count": 7,
+        "user_count": 1420,
+        "fpo_count": 18
+      }
+    },
+    "geo_profiles": {
+      "validator_description": "Stores geocoded coordinate profiles with Natural Earth and SRTM source references.",
+      "sample_document": {
+        "_id": "666ba12f1c9d9b3a4f88127c",
+        "lat": 17.3850,
+        "lon": 73.9500,
+        "elevation_m": 45.2,
+        "elevation_source": "OpenTopography / SRTM 30m GL1",
+        "distance_from_ocean_km": 18.52,
+        "coastline_boundary_source": "Natural Earth 1:10m Physical Coastline Vectors",
+        "soil_grid_ref": "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=73.9500&lat=17.3850",
+        "soil_type": "Chromic Luvisol",
+        "soil_taxonomy_source": "ISRIC World Soil Information System"
+      }
+    },
+    "soil_profiles": {
+      "validator_description": "Stores granular physical and chemical properties retrieved from ISRIC SoilGrids API.",
+      "sample_document": {
+        "_id": "666ba13f1c9d9b3a4f88127d",
+        "pH": 6.4,
+        "organic_carbon": 14.8,
+        "organic_carbon_unit": "g/kg",
+        "clay_pct": 28.5,
+        "sand_pct": 42.1,
+        "silt_pct": 29.4,
+        "salinity": 0.28,
+        "salinity_unit": "dS/m",
+        "source_layer": "0-5cm",
+        "database_source": "ISRIC SoilGrids v2.0 REST API",
+        "retrieved_at": "2026-06-14T01:43:00Z"
+      }
+    },
+    "batches": {
+      "validator_description": "Tracks harvest details, computer vision grade outputs, and soil reference links.",
+      "sample_document": {
+        "_id": "666ba14f1c9d9b3a4f88127e",
+        "batch_id": "BATCH-2026-00045",
+        "crop_type": "Tomato",
+        "plant_type": "Solanum lycopersicum",
+        "color_features": {
+          "mean_hue": 18.5,
+          "mean_saturation": 88.2,
+          "mean_value": 75.0,
+          "color_space": "HSV"
+        },
+        "grade_mix": {
+          "A_pct": 82.5,
+          "B_pct": 12.0,
+          "C_pct": 4.5,
+          "R_pct": 1.0
+        },
+        "farm_geo": {
+          "type": "Point",
+          "coordinates": [73.9500, 17.3850]
+        },
+        "soil_profile_id": "666ba13f1c9d9b3a4f88127d",
+        "risk_score": 12.0,
+        "operator_id": "9fa21dbf-8cd4-406a-a228-b80302b1f89f",
+        "traceability_hash_chain": "0x89ab7cd12345e678f9012345abcdef12345678901234567890abcdef123456"
+      }
+    },
+    "sensor_logs": {
+      "validator_description": "Stores raw timeseries telemetry captured by the ESP32-S3 edge node.",
+      "sample_document": {
+        "_id": "666ba15f1c9d9b3a4f88127f",
+        "device_id": "ESP32-A1F3",
+        "batch_id": "BATCH-2026-00045",
+        "timestamp": "2026-06-14T01:40:00Z",
+        "temperature_c": 24.3,
+        "humidity_rh": 63.8,
+        "co2_ppm": 450,
+        "soil_moisture_pct": 42.1,
+        "battery_v": 3.82,
+        "network_signal_dbm": -72
+      }
+    },
+    "users": {
+      "validator_description": "Enforces user accounts, RBAC roles, invitation links, and state limit metadata.",
+      "sample_document": {
+        "_id": "666ba16f1c9d9b3a4f881280",
+        "username": "ramesh_patra_99",
+        "email": "ramesh.patra@sahyadri.org",
+        "phone": "+919876543210",
+        "role": "STATE_ADMIN",
+        "country": "IND",
+        "state": "IND-MH",
+        "admin_level": "state",
+        "approval_status": "APPROVED",
+        "login_history": [
+          {
+            "timestamp": "2026-06-14T01:26:00Z",
+            "ip_address": "192.168.1.55",
+            "mfa_verified": true
+          }
+        ],
+        "created_at": "2026-06-14T01:00:00Z"
+      }
+    }
+  }
+}

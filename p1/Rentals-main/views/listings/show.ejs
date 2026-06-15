@@ -1,0 +1,300 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- ═══════════════════════════════════════
+     SECTION 1 — THE PROPERTY (HERO)
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-prop" style="background-image:url('<%= listing.image %>');">
+  <div class="scenic-overlay overlay-dark"></div>
+  <div class="scenic-glass wide-glass" style="max-width: 900px; text-align:center;">
+    <div class="step-badge">Property View</div>
+    <h1 style="font-size:3.5rem; font-weight:900; margin-bottom:1rem;"><%= listing.title %></h1>
+    <p style="font-size:1.2rem; opacity:0.9; margin-bottom:0.5rem;"><i class="fa-solid fa-location-dot" style="color:#ff6b6b;"></i> <%= listing.location %>, <%= listing.country %></p>
+    <p style="font-size:1rem; opacity:0.8; margin-bottom:2rem; max-width:600px; margin-left:auto; margin-right:auto;"><%= listing.description %></p>
+    
+    <div style="font-size:2rem; font-weight:800; color:#38ef7d; margin-bottom:2rem;">
+      &#8377;<%= listing.price?.toLocaleString("en-IN") || "0" %> <span style="font-size:1rem; font-weight:400; color:#fff;">/ night</span>
+    </div>
+
+    <!-- Edit/Delete Admin Buttons -->
+    <div class="mb-4">
+      <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-light" style="border-radius:2rem; padding:0.5rem 1.5rem; margin-right:0.5rem;">Edit</a>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" style="display:inline">
+        <button class="btn btn-outline-danger" style="border-radius:2rem; padding:0.5rem 1.5rem;">Delete</button>
+      </form>
+    </div>
+
+    <div class="nav-row mt-4">
+      <button class="nav-btn next" onclick="smoothGoListing('sec-amenities')">View Package <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — PACKAGE & AMENITIES
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-amenities" style="background-image:url('https://images.unsplash.com/photo-1542314831-c6a4d14b8fcb?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-green"></div>
+  <div class="scenic-glass wide-glass">
+    <div class="step-badge">Full Package</div>
+    <h2><i class="fa-solid fa-gem"></i> Travel Nest Premium Experience</h2>
+    <p class="glass-sub">Everything is taken care of. Pure comfort and good vibes.</p>
+
+    <div class="row row-cols-2 row-cols-md-4 g-3 mt-4 text-center">
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-moon" style="font-size:2rem; color:#38ef7d; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">Day &amp; Night</div>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-utensils" style="font-size:2rem; color:#ffc107; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">Premium Food</div>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-couch" style="font-size:2rem; color:#ff6b6b; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">Lounge Access</div>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-spa" style="font-size:2rem; color:#0dcaf0; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">Ultimate Comfort</div>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-shield-halved" style="font-size:2rem; color:#38ef7d; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">24/7 Security</div>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-bolt" style="font-size:2rem; color:#ffc107; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">Good Energy</div>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-heart-pulse" style="font-size:2rem; color:#ff6b6b; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">Well Care</div>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:rgba(255,255,255,0.1); padding:1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-camera-retro" style="font-size:2rem; color:#0dcaf0; margin-bottom:0.5rem;"></i>
+          <div style="font-weight:700;">Scenic Views</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row mt-4">
+      <button class="nav-btn back" onclick="smoothGoListing('sec-prop')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn next" onclick="smoothGoListing('sec-reviews')">See Reviews <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 3 — REVIEWS & RATINGS
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-reviews" style="background-image:url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-blue"></div>
+  <div class="scenic-glass wide-glass" style="max-height:85vh; overflow-y:auto;">
+    <div class="step-badge">Community</div>
+    <h2><i class="fa-solid fa-star"></i> Reviews &amp; Experiences</h2>
+    
+    <div class="row mt-4">
+      <!-- Leave Review Form -->
+      <div class="col-md-5 mb-4">
+        <div style="background:rgba(0,0,0,0.3); padding:1.5rem; border-radius:1rem;">
+          <h4 style="font-size:1.2rem; font-weight:700; margin-bottom:1rem;">Leave a Review</h4>
+          <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
+              <label class="form-label" style="font-size:0.9rem;">Rating: <span id="rval">3</span> / 5</label>
+              <input type="range" min="1" max="5" value="3" name="review[rating]" class="form-range" oninput="document.getElementById('rval').textContent = this.value">
+            </div>
+            <div class="mb-3">
+              <textarea name="review[comment]" rows="3" class="form-control" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:0.5rem;" placeholder="Share your experience..." required></textarea>
+            </div>
+            <button class="btn w-100" style="background:var(--primary); color:#fff; font-weight:700; border-radius:2rem;">Submit Review</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Review List -->
+      <div class="col-md-7">
+        <% if (listing.reviews && listing.reviews.length > 0) { %>
+          <div style="display:grid; gap:1rem;">
+            <% listing.reviews.forEach(review => { %>
+              <div style="background:rgba(255,255,255,0.1); padding:1rem 1.5rem; border-radius:1rem; border:1px solid rgba(255,255,255,0.2);">
+                <div class="d-flex justify-content-between mb-2">
+                  <strong style="color:#fff;"><i class="fa-solid fa-circle-user"></i> Guest</strong>
+                  <span style="color:#ffc107;">
+                    <% for(let i=1; i<=5; i++) { %>
+                      <i class="fa-<%= i <= review.rating ? 'solid' : 'regular' %> fa-star"></i>
+                    <% } %>
+                  </span>
+                </div>
+                <p style="font-size:0.95rem; margin-bottom:0.5rem;"><%= review.comment %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small style="opacity:0.6; font-size:0.8rem;"><%= new Date(review.createdAt).toLocaleDateString() %></small>
+                  <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                    <button class="btn btn-sm btn-outline-danger" style="padding:0.1rem 0.5rem; font-size:0.75rem;">Delete</button>
+                  </form>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div style="text-align:center; padding:3rem 0; opacity:0.7;">
+            <i class="fa-regular fa-comment-dots" style="font-size:3rem; margin-bottom:1rem;"></i>
+            <p>No reviews yet. Be the first to share your experience!</p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="nav-row mt-4">
+      <button class="nav-btn back" onclick="smoothGoListing('sec-amenities')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn next" onclick="smoothGoListing('sec-book')">Book Now <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 4 — BOOKING & PAYMENT
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-book" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-dark"></div>
+  <div class="scenic-glass wide-glass">
+    <div class="step-badge">Confirm & Pay</div>
+    <h2><i class="fa-solid fa-lock"></i> Reserve Your Stay</h2>
+    <p class="glass-sub">Secure <%= listing.title %> for your upcoming trip.</p>
+
+    <div class="row mt-4">
+      <!-- Stay Details -->
+      <div class="col-md-6 mb-4">
+        <h5 style="font-weight:700; margin-bottom:1rem;"><i class="fa-solid fa-calendar-days"></i> Stay Details</h5>
+        <div class="date-row" style="grid-template-columns:1fr 1fr; margin-top:0;">
+          <div><label>Check-in</label><input type="date" id="checkin" class="form-control" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:#fff;"/></div>
+          <div><label>Check-out</label><input type="date" id="checkout" class="form-control" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:#fff;"/></div>
+        </div>
+        <div class="mt-3">
+          <label style="font-weight:600; font-size:0.9rem; margin-bottom:0.3rem; display:block;">Guests</label>
+          <input type="number" class="form-control" min="1" max="10" value="2" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:#fff;">
+        </div>
+
+        <!-- Bank Offers -->
+        <div class="offers-strip mt-4" style="background:rgba(56,239,125,0.1); padding:1rem; border-radius:1rem;">
+          <h6 style="font-weight:700; margin-bottom:0.8rem;"><i class="fa-solid fa-tags" style="color:#38ef7d;"></i> Exclusive Offers</h6>
+          <div style="font-size:0.85rem; margin-bottom:0.3rem;"><strong>HDFC</strong> — 10% instant discount</div>
+          <div style="font-size:0.85rem;"><strong>SBI</strong> — 5% cashback on cards</div>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="col-md-6">
+        <h5 style="font-weight:700; margin-bottom:1rem;"><i class="fa-solid fa-credit-card"></i> Payment Method</h5>
+        <div style="display:grid; gap:0.8rem;">
+          <div class="pay-card" onclick="pickPayListing(this,'UPI')" style="padding:1rem;">
+            <div class="d-flex align-items-center gap-3">
+              <i class="fa-brands fa-google-pay" style="font-size:2rem; margin:0;"></i>
+              <div style="text-align:left;"><strong>UPI</strong><br><small>GPay · PhonePe</small></div>
+            </div>
+          </div>
+          <div class="pay-card" onclick="pickPayListing(this,'Card')" style="padding:1rem;">
+            <div class="d-flex align-items-center gap-3">
+              <i class="fa-regular fa-credit-card" style="font-size:2rem; margin:0;"></i>
+              <div style="text-align:left;"><strong>Card</strong><br><small>Visa · Mastercard</small></div>
+            </div>
+          </div>
+          <div class="pay-card" onclick="pickPayListing(this,'Net Banking')" style="padding:1rem;">
+            <div class="d-flex align-items-center gap-3">
+              <i class="fa-solid fa-building-columns" style="font-size:2rem; margin:0;"></i>
+              <div style="text-align:left;"><strong>Net Banking</strong><br><small>All major banks</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer-bar mt-4" style="background:rgba(255,193,7,0.15); border-left:4px solid #ffc107; padding:1rem; border-radius:0.5rem; display:flex; gap:1rem;">
+      <i class="fa-solid fa-triangle-exclamation" style="font-size:1.5rem; color:#ffc107;"></i>
+      <div style="font-size:0.85rem; color:#ffe082;">
+        <strong>No Refund Policy.</strong> All bookings are final. We do not offer refunds for cancellations or modifications under any circumstances. Please ensure dates are confirmed.
+      </div>
+    </div>
+
+    <div class="nav-row mt-4">
+      <button class="nav-btn back" onclick="smoothGoListing('sec-reviews')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn pay" id="btnPayListing" disabled onclick="confirmBookingListing()"><i class="fa-solid fa-lock"></i> Pay &#8377;<%= listing.price?.toLocaleString("en-IN") %></button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:1.5rem;border:none;text-align:center;padding:2.5rem; background:#1a1a2e; color:#fff;">
+      <i class="fa-solid fa-circle-check" style="font-size:4.5rem;color:#38ef7d;margin-bottom:1rem;"></i>
+      <h3 style="font-weight:800;">Booking Confirmed!</h3>
+      <p class="text-muted" id="confirm-msg" style="color:#aaa!important;">Your stay at <%= listing.title %> is secured.</p>
+      <a href="/listings" class="btn mt-3" style="border-radius:2rem;background:var(--primary);color:#fff;border:none;padding:0.8rem 2.5rem;font-weight:700;">Back to Listings</a>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING DOTS -->
+<div class="float-dots" id="float-dots-listing">
+  <div class="fdot active" onclick="smoothGoListing('sec-prop')" title="Property"></div>
+  <div class="fdot" onclick="smoothGoListing('sec-amenities')" title="Package"></div>
+  <div class="fdot" onclick="smoothGoListing('sec-reviews')" title="Reviews"></div>
+  <div class="fdot" onclick="smoothGoListing('sec-book')" title="Book"></div>
+</div>
+
+<script>
+function smoothGoListing(id) {
+  document.getElementById(id).scrollIntoView({ behavior:'smooth' });
+  const secs = ['sec-prop','sec-amenities','sec-reviews','sec-book'];
+  document.querySelectorAll('#float-dots-listing .fdot').forEach((d,i) => d.classList.toggle('active', secs[i]===id));
+}
+
+// Observer for floating dots
+document.addEventListener('DOMContentLoaded', () => {
+  const secs = document.querySelectorAll('.scenic-page');
+  const dots = document.querySelectorAll('#float-dots-listing .fdot');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        const idx = Array.from(secs).indexOf(e.target);
+        if(dots[idx]) {
+          dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+  secs.forEach(s => obs.observe(s));
+  
+  // set min date
+  const t = new Date().toISOString().split('T')[0];
+  const ci = document.getElementById('checkin');
+  const co = document.getElementById('checkout');
+  if(ci){ci.min=t;ci.value=t;} if(co){co.min=t;}
+});
+
+let selectedPay = '';
+function pickPayListing(el, p) {
+  document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  selectedPay = p;
+  document.getElementById('btnPayListing').disabled = false;
+}
+
+function confirmBookingListing() {
+  document.getElementById('confirm-msg').textContent = `Your stay at <%= listing.title %> is secured via ${selectedPay}. Check your email for details.`;
+  new bootstrap.Modal(document.getElementById('successModal')).show();
+}
+</script>

@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0B101E;
+  --color-panel: rgba(16, 24, 48, 0.4);
+  --color-accentCyan: #00D2FF;
+  --color-accentBlue: #2A8BF2;
+  --color-accentGreen: #00E676;
+  --color-accentOrange: #FF9100;
+  --color-accentRed: #FF1744;
+
+  --shadow-glowCyan: 0 0 15px rgba(0, 210, 255, 0.4);
+  --shadow-glowBlue: 0 0 15px rgba(42, 139, 242, 0.4);
+  --shadow-glowGreen: 0 0 15px rgba(0, 230, 118, 0.4);
+  --shadow-glowOrange: 0 0 15px rgba(255, 145, 0, 0.4);
+  --shadow-glowRed: 0 0 15px rgba(255, 23, 68, 0.4);
+
+  --font-mono: var(--font-mono), monospace;
+  --font-sans: var(--font-sans), sans-serif;
+}
+
+:root {
+  --background: #0B101E;
+  --foreground: #F8FAFC;
+  --accent-cyan: #00D2FF;
+  --accent-blue: #2A8BF2;
+  --accent-green: #00E676;
+  --accent-orange: #FF9100;
+  --accent-red: #FF1744;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(16, 24, 48, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(0, 210, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Glow effects */
+.glow-border-cyan {
+  border-color: rgba(0, 210, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
+}
+.glow-border-green {
+  border-color: rgba(0, 230, 118, 0.4);
+  box-shadow: 0 0 15px rgba(0, 230, 118, 0.25);
+}
+.glow-border-orange {
+  border-color: rgba(255, 145, 0, 0.4);
+  box-shadow: 0 0 15px rgba(255, 145, 0, 0.25);
+}
+.glow-border-red {
+  border-color: rgba(255, 23, 68, 0.4);
+  box-shadow: 0 0 15px rgba(255, 23, 68, 0.25);
+}
+
+/* Monospace data display */
+.font-mono-data {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(11, 16, 30, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+/* Leaflet dark theme override */
+.leaflet-container {
+  background: #0B101E !important;
+}
+.leaflet-tile {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) !important;
+}
+
+/* Animations */
+@keyframes slide-conveyor {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-40px); }
+}
+.animate-conveyor {
+  animation: slide-conveyor 3s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes progressBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

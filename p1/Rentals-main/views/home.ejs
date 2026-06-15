@@ -1,0 +1,425 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- ═══════════════════════════════════════
+     SECTION 0 — HERO
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-hero" style="background-image:url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay"></div>
+  <div class="scenic-glass hero-glass">
+    <span class="hero-badge"><i class="fa-solid fa-plane-departure"></i> TRAVEL NEST</span>
+    <h1>Your Journey<br/>Starts Here</h1>
+    <p>Family getaways · Romantic escapes · Solo adventures<br/>Budget-friendly stays with pure comfort &amp; good vibes</p>
+    
+    <div class="plans-row">
+      <div class="mini-plan" onclick="selectPlan(this,'Family')">
+        <i class="fa-solid fa-people-group"></i><span>Family</span>
+      </div>
+      <div class="mini-plan" onclick="selectPlan(this,'Couple')">
+        <i class="fa-solid fa-heart"></i><span>Couple</span>
+      </div>
+      <div class="mini-plan" onclick="selectPlan(this,'Solo')">
+        <i class="fa-solid fa-person-hiking"></i><span>Solo</span>
+      </div>
+      <div class="mini-plan" onclick="selectPlan(this,'Budget')">
+        <i class="fa-solid fa-indian-rupee-sign"></i><span>Budget</span>
+      </div>
+    </div>
+
+    <div class="feature-strip">
+      <span><i class="fa-solid fa-moon"></i> Day &amp; Night</span>
+      <span><i class="fa-solid fa-utensils"></i> Premium Food</span>
+      <span><i class="fa-solid fa-shield-halved"></i> 24/7 Safety</span>
+      <span><i class="fa-solid fa-spa"></i> Pure Comfort</span>
+      <span><i class="fa-solid fa-mountain-sun"></i> Good Vibes</span>
+    </div>
+
+    <button class="hero-cta" onclick="smoothGo('sec-featured')">
+      <i class="fa-solid fa-compass"></i> Start Booking
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 0.5 — FEATURED LISTINGS (ADVERTISEMENTS)
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-featured" style="background-image:url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-dark"></div>
+  <div class="scenic-glass wide-glass" style="max-width: 1100px;">
+    <div class="step-badge">Featured Advertisements</div>
+    <h2><i class="fa-solid fa-fire"></i> Top Picks For You</h2>
+    <p class="glass-sub">Discover our most loved properties &amp; dynamic packages</p>
+
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+      <% if (typeof alllisting !== 'undefined' && alllisting.length > 0) { %>
+        <% alllisting.slice(0, 6).forEach(listing => { %>
+          <div class="col">
+            <a href="/listings/<%= listing._id %>" style="text-decoration:none;">
+              <div class="country-card" style="padding:0; overflow:hidden; text-align:left; border-radius:1rem;">
+                <img src="<%= listing.image %>" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4'" style="width:100%; height:200px; object-fit:cover; margin-bottom:0; border-radius:0;" alt="<%= listing.title %>"/>
+                <div style="padding:1rem;">
+                  <strong style="font-size:1.1rem; color:#fff; display:block; margin-bottom:0.3rem;"><%= listing.title %></strong>
+                  <div style="font-size:0.85rem; color:#ccc; margin-bottom:0.5rem;"><i class="fa-solid fa-location-dot" style="color:#ff6b6b;"></i> <%= listing.location %>, <%= listing.country %></div>
+                  <div style="font-weight:700; color:#38ef7d;">&#8377; <%= listing.price?.toLocaleString("en-IN") %> / night</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p class="text-white">No featured listings currently available.</p>
+      <% } %>
+    </div>
+
+    <div class="nav-row mt-4">
+      <button class="nav-btn back" onclick="smoothGo('sec-hero')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <a href="/listings" class="nav-btn next" style="text-decoration:none;">View All Listings</a>
+      <button class="nav-btn pay" onclick="smoothGo('sec-country')">Or Build Custom <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 1 — COUNTRY SELECTION
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-country" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-blue"></div>
+  <div class="scenic-glass wide-glass">
+    <div class="step-badge">Step 1 of 5</div>
+    <h2><i class="fa-solid fa-globe"></i> Choose Your Destination Country</h2>
+    <p class="glass-sub">Begin your adventure by picking where you want to go</p>
+
+    <div class="country-grid">
+      <div class="country-card" onclick="pickCountry(this,'India')" data-bg="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1920&q=80">
+        <img src="https://flagcdn.com/w80/in.png" alt="IN"/>
+        <strong>India</strong>
+        <small>Diverse landscapes</small>
+      </div>
+      <div class="country-card" onclick="pickCountry(this,'Thailand')" data-bg="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1920&q=80">
+        <img src="https://flagcdn.com/w80/th.png" alt="TH"/>
+        <strong>Thailand</strong>
+        <small>Tropical paradise</small>
+      </div>
+      <div class="country-card" onclick="pickCountry(this,'Sri Lanka')" data-bg="https://images.unsplash.com/photo-1586523969720-2dae04a47664?auto=format&fit=crop&w=1920&q=80">
+        <img src="https://flagcdn.com/w80/lk.png" alt="LK"/>
+        <strong>Sri Lanka</strong>
+        <small>Island beauty</small>
+      </div>
+      <div class="country-card" onclick="pickCountry(this,'Nepal')" data-bg="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1920&q=80">
+        <img src="https://flagcdn.com/w80/np.png" alt="NP"/>
+        <strong>Nepal</strong>
+        <small>Himalayan heights</small>
+      </div>
+      <div class="country-card" onclick="pickCountry(this,'Indonesia')" data-bg="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1920&q=80">
+        <img src="https://flagcdn.com/w80/id.png" alt="ID"/>
+        <strong>Indonesia</strong>
+        <small>Island wonders</small>
+      </div>
+      <div class="country-card" onclick="pickCountry(this,'Maldives')" data-bg="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1920&q=80">
+        <img src="https://flagcdn.com/w80/mv.png" alt="MV"/>
+        <strong>Maldives</strong>
+        <small>Ocean paradise</small>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn back" onclick="smoothGo('sec-hero')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn next" id="btn1" disabled onclick="smoothGo('sec-state')">Next <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — STATE / REGION
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-state" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-green"></div>
+  <div class="scenic-glass wide-glass">
+    <div class="step-badge">Step 2 of 5</div>
+    <h2><i class="fa-solid fa-map-location-dot"></i> Select State / Region</h2>
+    <p class="glass-sub">Explore the best spots in <strong id="chosen-country">your country</strong></p>
+
+    <div class="state-grid" id="state-grid"></div>
+
+    <div class="nav-row">
+      <button class="nav-btn back" onclick="smoothGo('sec-country')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn next" id="btn2" disabled onclick="smoothGo('sec-budget')">Next <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 3 — BUDGET & VIEWPOINT
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-budget" style="background-image:url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-gold"></div>
+  <div class="scenic-glass wide-glass">
+    <div class="step-badge">Step 3 of 5</div>
+    <h2><i class="fa-solid fa-indian-rupee-sign"></i> Budget &amp; Viewpoint</h2>
+    <p class="glass-sub">Set your budget range and the scenery you love</p>
+
+    <h5 class="picker-label"><i class="fa-solid fa-wallet"></i> Budget Range</h5>
+    <div class="budget-row">
+      <div class="bud-card" onclick="pickBudget(this,'₹2K – ₹5K')"><i class="fa-solid fa-seedling"></i><strong>Economy</strong><small>₹2,000 – ₹5,000</small></div>
+      <div class="bud-card" onclick="pickBudget(this,'₹5K – ₹15K')"><i class="fa-solid fa-star"></i><strong>Standard</strong><small>₹5,000 – ₹15,000</small></div>
+      <div class="bud-card" onclick="pickBudget(this,'₹15K – ₹40K')"><i class="fa-solid fa-crown"></i><strong>Premium</strong><small>₹15,000 – ₹40,000</small></div>
+      <div class="bud-card" onclick="pickBudget(this,'₹40K+')"><i class="fa-solid fa-gem"></i><strong>Luxury</strong><small>₹40,000+</small></div>
+    </div>
+
+    <h5 class="picker-label mt-lg"><i class="fa-solid fa-image"></i> Preferred View</h5>
+    <div class="view-chips">
+      <div class="vchip" onclick="pickView(this,'Beach')"><i class="fa-solid fa-umbrella-beach"></i> Beach</div>
+      <div class="vchip" onclick="pickView(this,'Mountain')"><i class="fa-solid fa-mountain"></i> Mountain</div>
+      <div class="vchip" onclick="pickView(this,'City')"><i class="fa-solid fa-city"></i> City</div>
+      <div class="vchip" onclick="pickView(this,'Forest')"><i class="fa-solid fa-tree"></i> Forest</div>
+      <div class="vchip" onclick="pickView(this,'Lake')"><i class="fa-solid fa-water"></i> Lake</div>
+      <div class="vchip" onclick="pickView(this,'Desert')"><i class="fa-solid fa-sun"></i> Desert</div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn back" onclick="smoothGo('sec-state')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn next" id="btn3" disabled onclick="smoothGo('sec-stay')">Next <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 4 — STAY DURATION
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-stay" style="background-image:url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-purple"></div>
+  <div class="scenic-glass wide-glass">
+    <div class="step-badge">Step 4 of 5</div>
+    <h2><i class="fa-solid fa-calendar-days"></i> Stay Duration</h2>
+    <p class="glass-sub">How long do you want to enjoy paradise?</p>
+
+    <div class="dur-row">
+      <div class="dur-card" onclick="pickDur(this,'1N / 2D')"><i class="fa-solid fa-moon"></i><strong>1N / 2D</strong><small>Weekend Escape</small></div>
+      <div class="dur-card" onclick="pickDur(this,'2N / 3D')"><i class="fa-solid fa-cloud-moon"></i><strong>2N / 3D</strong><small>Short Trip</small></div>
+      <div class="dur-card" onclick="pickDur(this,'4N / 5D')"><i class="fa-solid fa-campground"></i><strong>4N / 5D</strong><small>Full Experience</small></div>
+      <div class="dur-card" onclick="pickDur(this,'6N / 7D')"><i class="fa-solid fa-umbrella-beach"></i><strong>6N / 7D</strong><small>Grand Vacation</small></div>
+    </div>
+
+    <div class="date-row">
+      <div><label>Check-in</label><input type="date" id="checkin" class="form-control"/></div>
+      <div><label>Check-out</label><input type="date" id="checkout" class="form-control"/></div>
+      <div><label>Guests</label><input type="number" id="guests" class="form-control" min="1" max="12" value="2"/></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn back" onclick="smoothGo('sec-budget')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn next" id="btn4" disabled onclick="smoothGo('sec-pay')">Next <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 5 — PAYMENT
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-pay" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-dark"></div>
+  <div class="scenic-glass wide-glass">
+    <div class="step-badge">Step 5 of 5</div>
+    <h2><i class="fa-solid fa-credit-card"></i> Confirm &amp; Pay</h2>
+    <p class="glass-sub">Review your trip and complete the booking</p>
+
+    <!-- Summary -->
+    <div class="summary-box" id="summary-box"></div>
+
+    <!-- Bank Offers -->
+    <div class="offers-strip">
+      <h5><i class="fa-solid fa-tags"></i> Bank Offers</h5>
+      <div class="offers-row">
+        <div class="offer"><strong>HDFC</strong> — 10% instant discount</div>
+        <div class="offer"><strong>SBI</strong> — 5% cashback on cards</div>
+        <div class="offer"><strong>ICICI</strong> — 0% EMI for 6 months</div>
+        <div class="offer"><strong>Axis</strong> — ₹500 off on net banking</div>
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <h5 class="picker-label"><i class="fa-solid fa-lock"></i> Payment Method</h5>
+    <div class="pay-row">
+      <div class="pay-card" onclick="pickPay(this,'UPI')"><i class="fa-brands fa-google-pay"></i><strong>UPI</strong><small>GPay · PhonePe · Paytm</small></div>
+      <div class="pay-card" onclick="pickPay(this,'Card')"><i class="fa-regular fa-credit-card"></i><strong>Card</strong><small>Visa · Mastercard · Rupay</small></div>
+      <div class="pay-card" onclick="pickPay(this,'Net Banking')"><i class="fa-solid fa-building-columns"></i><strong>Net Banking</strong><small>All major banks</small></div>
+    </div>
+
+    <div class="disclaimer-bar">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span><strong>No Refund Policy.</strong> All bookings are final. Please confirm dates before paying.</span>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn back" onclick="smoothGo('sec-stay')"><i class="fa-solid fa-arrow-up"></i> Back</button>
+      <button class="nav-btn pay" id="btnPay" disabled onclick="confirmBooking()"><i class="fa-solid fa-lock"></i> Confirm &amp; Pay</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:1.5rem;border:none;text-align:center;padding:2.5rem;">
+      <i class="fa-solid fa-circle-check" style="font-size:4.5rem;color:#38ef7d;margin-bottom:1rem;"></i>
+      <h3 style="font-weight:800;">Booking Confirmed!</h3>
+      <p class="text-muted" id="confirm-msg">Your dream trip is booked.</p>
+      <a href="/listings" class="btn mt-3" style="border-radius:2rem;background:var(--primary);color:#fff;border:none;padding:0.8rem 2.5rem;font-weight:700;">Explore Listings</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PROGRESS DOTS (FLOATING)
+═══════════════════════════════════════ -->
+<div class="float-dots" id="float-dots">
+  <div class="fdot active" onclick="smoothGo('sec-hero')" title="Home"></div>
+  <div class="fdot" onclick="smoothGo('sec-featured')" title="Featured"></div>
+  <div class="fdot" onclick="smoothGo('sec-country')" title="Country"></div>
+  <div class="fdot" onclick="smoothGo('sec-state')" title="State"></div>
+  <div class="fdot" onclick="smoothGo('sec-budget')" title="Budget"></div>
+  <div class="fdot" onclick="smoothGo('sec-stay')" title="Stay"></div>
+  <div class="fdot" onclick="smoothGo('sec-pay')" title="Payment"></div>
+</div>
+
+<script>
+// ── State ──
+const B = { plan:'', country:'', state:'', budget:'', view:'', dur:'', pay:'' };
+
+const stateMap = {
+  'India':['Goa','Kerala','Rajasthan','Himachal Pradesh','Uttarakhand','Maharashtra','Karnataka','Tamil Nadu'],
+  'Thailand':['Bangkok','Phuket','Chiang Mai','Krabi','Pattaya'],
+  'Sri Lanka':['Colombo','Kandy','Ella','Galle','Sigiriya'],
+  'Nepal':['Kathmandu','Pokhara','Chitwan','Lumbini'],
+  'Indonesia':['Bali','Jakarta','Yogyakarta','Lombok'],
+  'Maldives':['Malé','Ari Atoll','Baa Atoll','South Malé']
+};
+
+const stateImages = {
+  'Goa':'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80',
+  'Kerala':'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=400&q=80',
+  'Rajasthan':'https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=400&q=80',
+  'Himachal Pradesh':'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=400&q=80',
+  'Uttarakhand':'https://images.unsplash.com/photo-1580289143186-41dbe95607b1?auto=format&fit=crop&w=400&q=80',
+  'Maharashtra':'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=400&q=80',
+  'Karnataka':'https://images.unsplash.com/photo-1600100397608-e18e6e81af0e?auto=format&fit=crop&w=400&q=80',
+  'Tamil Nadu':'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80',
+  'Bali':'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&q=80',
+  'Phuket':'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=400&q=80'
+};
+
+function smoothGo(id) {
+  document.getElementById(id).scrollIntoView({ behavior:'smooth' });
+  // Update floating dots
+  const secs = ['sec-hero','sec-featured','sec-country','sec-state','sec-budget','sec-stay','sec-pay'];
+  document.querySelectorAll('.fdot').forEach((d,i) => d.classList.toggle('active', secs[i]===id));
+}
+
+// ── Hero: Plan ──
+function selectPlan(el, plan) {
+  document.querySelectorAll('.mini-plan').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  B.plan = plan;
+}
+
+// ── Layer 1: Country ──
+function pickCountry(el, country) {
+  document.querySelectorAll('.country-card').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  B.country = country;
+  document.getElementById('btn1').disabled = false;
+  document.getElementById('chosen-country').textContent = country;
+  // Change section 2 background
+  const bg = el.dataset.bg;
+  if(bg) document.getElementById('sec-state').style.backgroundImage = "url('" + bg + "')";
+  // Build state grid
+  const grid = document.getElementById('state-grid');
+  grid.innerHTML = '';
+  (stateMap[country]||[]).forEach(s => {
+    const img = stateImages[s] || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80';
+    grid.innerHTML += '<div class="state-card" onclick="pickState(this,\'' + s + '\')">' +
+      '<img src="' + img + '" alt="' + s + '" onerror="this.src=\'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80\'"/>' +
+      '<div class="state-info"><strong>' + s + '</strong></div></div>';
+  });
+}
+
+// ── Layer 2: State ──
+function pickState(el, state) {
+  document.querySelectorAll('.state-card').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  B.state = state;
+  document.getElementById('btn2').disabled = false;
+}
+
+// ── Layer 3: Budget & View ──
+function pickBudget(el, b) {
+  document.querySelectorAll('.bud-card').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  B.budget = b;
+  checkStep3();
+}
+function pickView(el, v) {
+  document.querySelectorAll('.vchip').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  B.view = v;
+  checkStep3();
+}
+function checkStep3() { document.getElementById('btn3').disabled = !(B.budget && B.view); }
+
+// ── Layer 4: Duration ──
+function pickDur(el, d) {
+  document.querySelectorAll('.dur-card').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  B.dur = d;
+  document.getElementById('btn4').disabled = false;
+}
+
+// ── Layer 5: Payment ──
+function pickPay(el, p) {
+  document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+  B.pay = p;
+  document.getElementById('btnPay').disabled = false;
+}
+
+function confirmBooking() {
+  document.getElementById('confirm-msg').textContent =
+    B.plan + ' trip to ' + B.state + ', ' + B.country + ' (' + B.dur + ') via ' + B.pay + ' — Confirmed!';
+  new bootstrap.Modal(document.getElementById('successModal')).show();
+}
+
+// ── Build summary when scrolling to payment ──
+const payObs = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting) {
+    document.getElementById('summary-box').innerHTML =
+      '<h5><i class="fa-solid fa-receipt"></i> Trip Summary</h5><div class="sum-grid">' +
+      '<div><i class="fa-solid fa-suitcase"></i> <strong>Plan:</strong> ' + (B.plan||'Any') + '</div>' +
+      '<div><i class="fa-solid fa-globe"></i> <strong>Country:</strong> ' + (B.country||'—') + '</div>' +
+      '<div><i class="fa-solid fa-location-dot"></i> <strong>State:</strong> ' + (B.state||'—') + '</div>' +
+      '<div><i class="fa-solid fa-wallet"></i> <strong>Budget:</strong> ' + (B.budget||'—') + '</div>' +
+      '<div><i class="fa-solid fa-image"></i> <strong>View:</strong> ' + (B.view||'—') + '</div>' +
+      '<div><i class="fa-solid fa-calendar"></i> <strong>Stay:</strong> ' + (B.dur||'—') + '</div></div>';
+  }
+}, { threshold: 0.3 });
+payObs.observe(document.getElementById('sec-pay'));
+
+// ── Floating dots observer ──
+const secs = document.querySelectorAll('.scenic-page');
+const dots = document.querySelectorAll('.fdot');
+const secObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const idx = Array.from(secs).indexOf(e.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+    }
+  });
+}, { threshold: 0.5 });
+secs.forEach(s => secObs.observe(s));
+
+// ── Set min dates ──
+document.addEventListener('DOMContentLoaded', () => {
+  const t = new Date().toISOString().split('T')[0];
+  const ci = document.getElementById('checkin');
+  const co = document.getElementById('checkout');
+  if(ci){ci.min=t;ci.value=t;} if(co){co.min=t;}
+});
+</script>

@@ -1,0 +1,132 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- ═══════════════════════════════════════
+     SECTION 1 — ALL LISTINGS HERO
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-index-hero" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1920&q=80');">
+  <div class="scenic-overlay overlay-dark"></div>
+  <div class="scenic-glass wide-glass text-center" style="max-width: 800px;">
+    <div class="step-badge">Explore All</div>
+    <h1 style="font-size:3rem; font-weight:900; margin-bottom:1rem;">Discover Your<br>Perfect Stay</h1>
+    <p style="font-size:1.1rem; opacity:0.9; margin-bottom:2rem;">Browse all our travel packages. Top-notch amenities, safety, and ultimate comfort.</p>
+
+    <!-- State Filter -->
+    <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:0.5rem; border-radius:2rem; display:inline-flex; align-items:center; gap:0.5rem; max-width:100%;">
+      <i class="fa-solid fa-map-location-dot" style="margin-left:1rem; color:#ff6b6b;"></i>
+      <select id="stateFilter" onchange="filterListings()" style="background:transparent; border:none; color:#fff; font-weight:600; outline:none; padding:0.5rem; cursor:pointer;">
+        <option value="All" style="color:#000;">All Locations</option>
+        <option value="Goa" style="color:#000;">Goa</option>
+        <option value="Kerala" style="color:#000;">Kerala</option>
+        <option value="Maharashtra" style="color:#000;">Maharashtra</option>
+        <option value="Rajasthan" style="color:#000;">Rajasthan</option>
+        <option value="Himachal Pradesh" style="color:#000;">Himachal Pradesh</option>
+        <option value="Uttarakhand" style="color:#000;">Uttarakhand</option>
+      </select>
+    </div>
+
+    <div class="nav-row mt-4">
+      <button class="nav-btn next" onclick="smoothGoIndex('sec-index-grid')">View Destinations <i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — LISTINGS GRID
+═══════════════════════════════════════ -->
+<div class="scenic-page" id="sec-index-grid" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80'); padding-top:6rem; padding-bottom:6rem;">
+  <div class="scenic-overlay overlay-blue"></div>
+  <div class="scenic-glass wide-glass" style="max-width: 1200px; max-height:85vh; overflow-y:auto;">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <div class="step-badge">Destinations</div>
+        <h2><i class="fa-solid fa-fire"></i> Trending Destinations</h2>
+      </div>
+      <a href="/listings/new" class="btn" style="background:var(--primary); color:#fff; border-radius:2rem; font-weight:700; padding:0.6rem 1.5rem; border:none;">
+        + Add New
+      </a>
+    </div>
+
+    <% if (alllisting.length === 0) { %>
+      <div class="text-center py-5">
+        <i class="fa-solid fa-house-circle-xmark fa-3x mb-3" style="color:rgba(255,255,255,0.5);"></i>
+        <p style="color:rgba(255,255,255,0.7);">No listings found. Be the first to add one!</p>
+      </div>
+    <% } else { %>
+      <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4" id="listingsContainer"> 
+        <% for(let listing of alllisting) { %>
+          <div class="col listing-item" data-location="<%= listing.location ? listing.location.toLowerCase() : '' %>">
+            <a href="/listings/<%= listing._id %>" style="text-decoration:none;">
+              <div class="country-card" style="padding:0; overflow:hidden; text-align:left; border-radius:1rem; height:100%;">
+                <img src="<%= listing.image %>" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4'" style="width:100%; height:200px; object-fit:cover; margin-bottom:0; border-radius:0;" alt="<%= listing.title %>"/>
+                <div style="padding:1rem;">
+                  <strong style="font-size:1.1rem; color:#fff; display:block; margin-bottom:0.3rem;"><%= listing.title %></strong>
+                  <div style="font-size:0.85rem; color:#ccc; margin-bottom:0.5rem;"><i class="fa-solid fa-location-dot" style="color:#ff6b6b;"></i> <%= listing.location %>, <%= listing.country %></div>
+                  <div style="font-weight:700; color:#38ef7d; margin-bottom:0.5rem;">&#8377; <%= listing.price?.toLocaleString("en-IN") %> / night</div>
+                  <div style="font-size:0.75rem; background:rgba(255,255,255,0.1); padding:0.3rem 0.6rem; border-radius:1rem; display:inline-block; border:1px solid rgba(255,255,255,0.2);">
+                    <i class="fa-solid fa-star" style="color:#ffc107;"></i> Full Package
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+
+    <div class="nav-row mt-4">
+      <button class="nav-btn back" onclick="smoothGoIndex('sec-index-hero')"><i class="fa-solid fa-arrow-up"></i> Back to Top</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FLOATING DOTS -->
+<div class="float-dots" id="float-dots-index">
+  <div class="fdot active" onclick="smoothGoIndex('sec-index-hero')" title="Explore"></div>
+  <div class="fdot" onclick="smoothGoIndex('sec-index-grid')" title="Destinations"></div>
+</div>
+
+<script>
+function filterListings() {
+  const selectedState = document.getElementById("stateFilter").value.toLowerCase();
+  const listings = document.querySelectorAll(".listing-item");
+  
+  listings.forEach(listing => {
+    const location = listing.getAttribute("data-location");
+    if (selectedState === "all" || location.includes(selectedState)) {
+      listing.style.display = "block";
+    } else {
+      listing.style.display = "none";
+    }
+  });
+
+  // Scroll down to grid automatically when filtering
+  if (window.scrollY < document.getElementById('sec-index-grid').offsetTop - 100) {
+    smoothGoIndex('sec-index-grid');
+  }
+}
+
+function smoothGoIndex(id) {
+  document.getElementById(id).scrollIntoView({ behavior:'smooth' });
+  const secs = ['sec-index-hero','sec-index-grid'];
+  document.querySelectorAll('#float-dots-index .fdot').forEach((d,i) => d.classList.toggle('active', secs[i]===id));
+}
+
+// Observer for floating dots
+document.addEventListener('DOMContentLoaded', () => {
+  const secs = document.querySelectorAll('.scenic-page');
+  const dots = document.querySelectorAll('#float-dots-index .fdot');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        const idx = Array.from(secs).indexOf(e.target);
+        if(dots[idx]) {
+          dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+  secs.forEach(s => obs.observe(s));
+});
+</script>
