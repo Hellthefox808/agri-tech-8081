@@ -6,5 +6,10 @@
     "dev": "npm run --prefix p1 dev",
     "build": "npm run --prefix p1 build",
     "start": "npm run --prefix p1 start"
+  },
+  "dependencies": {
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   }
 }
