@@ -1,6 +1,7 @@
 import { MongoClient, Db } from 'mongodb';
+import { env } from '../env';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = env.MONGODB_URI;
 const DB_NAME = 'agri-tech-ai';
 
 let cachedClient: MongoClient | null = null;

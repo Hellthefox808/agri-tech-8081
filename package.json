@@ -2,6 +2,9 @@
   "name": "agri-tech-root",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "p1"
+  ],
   "scripts": {
     "dev": "npm run --prefix p1 dev",
     "build": "npm run --prefix p1 build",
