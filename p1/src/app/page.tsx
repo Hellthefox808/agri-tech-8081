@@ -97,8 +97,10 @@ export default function Page() {
   const [batches, setBatches] = useState<any[]>([]);
   const [activeFarmNodes] = useState(FARM_NODES);
 
-  // Fetch batches on mount / view shift
+  // Fetch batches only when entering the traceability view
   useEffect(() => {
+    if (activeView !== 'traceability') return;
+
     fetch('/api/v1/batches')
       .then(res => {
         if (!res.ok) throw new Error("API failed");

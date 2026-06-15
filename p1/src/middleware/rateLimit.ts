@@ -9,6 +9,16 @@ const rateLimitMap = new Map<string, RateLimitRecord>();
 
 export function checkRateLimit(ip: string, limitKey: string, maxRequests: number, windowMs: number): boolean {
   const now = Date.now();
+
+  // Lazy cleanup to prevent memory exhaustion
+  if (rateLimitMap.size > 2000) {
+    for (const [key, record] of rateLimitMap.entries()) {
+      if (now > record.resetTime) {
+        rateLimitMap.delete(key);
+      }
+    }
+  }
+
   const cacheKey = `${ip}:${limitKey}`;
 
   let record = rateLimitMap.get(cacheKey);
